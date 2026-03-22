@@ -1,43 +1,213 @@
 /* ============================================ Home page 1 =========================================== */
 
-/* hero */
+/* hero part! */
+
+/* ------------ Animation -----------------*/
+
+.hero-title,
+.hero-subtitle,
+.hero-text-p,
+.hero-image {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease forwards;
+}
+
+.hero-subtitle {
+  animation-delay: 0.35s;
+}
+
+.hero-text-p{
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ------------------------ */
 
 .hero {
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 60px;
+  padding: 40px 8%;
+  background: linear-gradient(135deg, rgba(219,234,254,0.95), rgba(96,165,250,0.9));
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-text {
   font-family: 'Raleway', sans-serif;
   padding-left: 120px;
   width: 50%;
+  flex: 1;
 }
 
-.hero-text h1 {
-  font-size: 90px;
-  margin: 0;
+.hero-title {
+  font-size: 3.2rem;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 20px;
+  max-width: 600px;
 }
 
-.hero-text h2 {
-  font-size: 36px;
-  margin: 10px 0;
+.hero-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #1e3a8a;
+  max-width: 560px;
+  margin-bottom: 30px;
 }
 
 .hero-text p {
   font-size: 18px;
 }
 
+
 .hero-image {
-  width: 40%;
-  padding-right: 90px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-image img {
   width: 100%;
+  max-width: 430px;
   height: auto;
+  display: block;
 }
+.hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+}
+
+.hero-wave svg {
+  display: block;
+  width: 100%;
+  height: 120px;
+}
+
+.hero-wave path {
+  fill: white; /* same as page 2 background */
+}
+/* ----------------------------------- intro img slide show ---------------------------------------------*/
+
+* {box-sizing: border-box}
+body {
+  margin:0
+}
+
+.mySlides img {
+  display: block;
+  margin: auto;
+  max-width: 800px;
+  object-fit: cover;
+}
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: rgb(125, 186, 255);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 5px 5px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(159, 159, 159, 0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
 
 /* --------------------------------- here are the three shortcuts to diff page ---------------------------------------*/
 
