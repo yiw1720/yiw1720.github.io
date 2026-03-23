@@ -20,7 +20,7 @@ body {
 /* ------------------------------------ common layout ----------------------------------------------*/
 
 .container_text{
-  padding: 100px;
+  margin:auto
 }
 
 /* ------------------------------------------- navbar -------------------------------------------- */
@@ -364,7 +364,7 @@ body {
 
 /* fade effect */
 .fade {
-  animation: fadeEffect 0.8s ease;
+  animation: fadeEffect 1.2s ease;
 }
 
 @keyframes fadeEffect {
@@ -399,6 +399,7 @@ body {
   color: #333333;
   max-width: 900px;
   padding-top: 0;
+  padding-bottom: 0;
 }
 
 .quote-box::before,
@@ -433,16 +434,19 @@ body {
 /* --------------------------------- here are the three shortcuts to diff page ---------------------------------------*/
 
 .column {
-  flex:33.3%;
-  padding:5px;
-  }
+  flex:none;
+  text-align: center;
+}
     
 .row {
   display: flex;
+  justify-content: center;   /* ⭐ centers horizontally */
+  align-items: center;       /* optional: vertical alignment */
+  gap: 170px;
   }
 
 .shortcut {
-  padding:60px 40px;
+  padding:20px 40px;
 }
   
 
