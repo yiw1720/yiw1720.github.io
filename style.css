@@ -19,8 +19,16 @@ body {
 }
 /* ------------------------------------ common layout ----------------------------------------------*/
 
-.container_text{
-  margin:auto
+.text-container{
+  max-width: 800px;        /* controls width */
+  margin: 60px auto;       /* center + vertical spacing */
+  padding: 0 20px;         /* space on small screens */
+
+  font-size: 1.1rem;
+  line-height: 1.7;
+
+  color: #333;
+  text-align: left;
 }
 
 /* ------------------------------------------- navbar -------------------------------------------- */
