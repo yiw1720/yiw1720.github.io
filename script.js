@@ -8,36 +8,57 @@ const menuBtn = document.getElementById("menuBtn");
     });
 
 // homepage img side show 
+let slideIndex = 0;
+let slideTimer;
 
-let slideIndex = 1;
-showSlides(slideIndex);
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+function showSlide(index) {
+  // wrap around
+  if (index >= slides.length) {
+    slideIndex = 0;
+  } else if (index < 0) {
+    slideIndex = slides.length - 1;
+  } else {
+    slideIndex = index;
   }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
+
+  // hide all slides
+  slides.forEach(slide => {
+    slide.style.display = "none";
+  });
+
+  // remove active from all dots
+  dots.forEach(dot => {
+    dot.classList.remove("active");
+  });
+
+  // show current slide
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].classList.add("active");
 }
 
+function nextSlide() {
+  showSlide(slideIndex + 1);
+}
 
+function startSlideshow() {
+  slideTimer = setInterval(() => {
+    nextSlide();
+  }, 3000);
+}
 
+function resetSlideshow() {
+  clearInterval(slideTimer);
+  startSlideshow();
+}
 
+function goToSlide(index) {
+  showSlide(index);
+  resetSlideshow();
+}
 
-
+// initialize
+showSlide(slideIndex);
+startSlideshow();

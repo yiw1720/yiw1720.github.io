@@ -262,102 +262,171 @@ body {
   fill: white; /* same as page 2 background */
 }
 /* ----------------------------------- intro img slide show ---------------------------------------------*/
+/* below can be used to test space in between sections */
+/* * {
+  outline: 1px solid red;
+} */
 
-* {box-sizing: border-box}
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin:0
+  margin: 0;
 }
 
-.mySlides img {
-  display: block;
-  margin: auto;
-  max-width: 800px;
-  object-fit: cover;
+/* whole section: slideshow left, text right */
+.intro-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+  padding: 80px;
+  background: white;
+  padding-bottom: 10px;
 }
-/* Slideshow container */
+
+/* left side */
+.intro-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* right side */
+.intro-right {
+  flex: 1;
+  max-width: 420px;
+}
+
+.intro-right h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.intro-right p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+/* slideshow box */
 .slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: rgb(125, 186, 255);
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 5px 5px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(159, 159, 159, 0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
   width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* each slide */
+.slide {
+  display: none;
+  width: 100%;
+}
+
+/* image */
+.slide img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+/* caption under image */
+.caption {
   text-align: center;
+  margin-top: 14px;
+  font-size: 1rem;
+  color: #333;
 }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+/* dots area */
+.dots-container {
+  text-align: center;
+  margin-top: 18px;
 }
 
-/* The dots/bullets/indicators */
 .dot {
   cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  background-color: #c7c7c7;
   border-radius: 50%;
   display: inline-block;
-  transition: background-color 0.6s ease;
+  transition: background-color 0.3s ease;
 }
 
-.active, .dot:hover {
-  background-color: #717171;
+.dot.active {
+  background-color: #555;
 }
 
-/* Fading animation */
+/* fade effect */
 .fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
+  animation: fadeEffect 0.8s ease;
 }
 
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+@keyframes fadeEffect {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
 }
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
+/* mobile */
+@media (max-width: 900px) {
+  .intro-section {
+    flex-direction: column;
+    padding: 50px 24px;
+    gap: 40px;
+  }
+
+  .intro-right {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .slide img {
+    height: 260px;
+  }
+}
+
+/* --------------------------------- hero slogan ------------------------------------- */
+.quote-box {
+  position: relative;
+  padding: 90px 110px;
+  font-size: 1.2rem;
+  margin: 80px auto;
+  color: #333333;
+  max-width: 900px;
+  padding-top: 0;
+}
+
+.quote-box::before,
+.quote-box::after {
+  position: absolute;
+  font-size: 120px;
+  color: rgba(0, 0, 0, 1);
+  font-family: Georgia, serif;
+}
+
+.quote-box::before {
+  content: "“";
+  top: 0;
+  left: 30px;
+}
+
+.quote-box::after {
+  content: "”";
+  bottom: 0;
+  right: 30px;
+}
+
+.quote-box p {
+  margin: 0;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.8rem;
+  color: #444;
 }
 
 
