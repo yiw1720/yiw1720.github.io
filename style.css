@@ -283,47 +283,76 @@ body {
   margin: 0;
 }
 
-/* whole section: slideshow left, text right */
-.intro-section {
+/* General 2-column section */
+.two-column-section {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;   /* top-align both sides */
   gap: 60px;
   padding: 80px;
   background: white;
-  padding-bottom: 10px;
 }
 
-/* left side */
-.intro-left {
+/* Shared column behavior */
+.column {
   flex: 1;
-  display: flex;
-  justify-content: center;
+  min-width: 0;
 }
 
-/* right side */
-.intro-right {
+/* Left slideshow column */
+.slideshow-column {
   flex: 1;
-  max-width: 420px;
+  min-width: 0;
 }
 
-.intro-right h2 {
-  font-size: 2rem;
+/* Right text column */
+.text-column {
+  flex:1;
+  min-width: 0;
+  max-width: 520px;
+  text-align: left;
+  margin: 0;
+}
+
+.text-column h1,
+.text-column h2,
+.text-column p {
+  text-align: left;
+}
+.text-column h1,
+.text-column h2 {
+  margin-top: 0;
   margin-bottom: 20px;
 }
 
-.intro-right p {
-  font-size: 1rem;
-  line-height: 1.7;
+.text-column p {
+  font-size: 1.1rem;
+  line-height: 1.8;
   color: #444;
+  margin-top: 0;
   margin-bottom: 16px;
 }
 
-/* slideshow box */
-.slideshow-container {
+/* Sample image column */
+.image-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.image-column img {
   width: 100%;
   max-width: 500px;
-  position: relative;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
+.slideshow-container {
+  width: 100%;
+  max-width: 680px;
 }
 
 /* each slide */
@@ -345,7 +374,7 @@ body {
 .caption {
   text-align: center;
   margin-top: 14px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #333;
 }
 
