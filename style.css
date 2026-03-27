@@ -490,6 +490,56 @@ body {
 /* ======================================== end of home page 1 ============================================== */
 
 /* ================================================= id home page =================================================== */
+/* ---------------------------------- intro course selection menu -------------------------------- */
+.course-menu {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 0 40px;
+  background-color:#ffffff 
+}
+
+.course-menu h2 {
+  font-size: 3rem;
+  margin-bottom: 40px;
+  color: #111;
+}
+
+.course-menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 2px solid #ddd;
+  text-decoration: none;
+  color: #111;
+  transition: all 0.3s ease;
+}
+
+.course-menu-item:hover {
+  transform: translateX(6px);
+}
+
+.menu-text h3 {
+  font-size: 2rem;
+  margin: 0 0 8px 0;
+}
+
+.menu-text p {
+  margin: 0;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.arrow {
+  font-size: 2rem;
+  color: #111;
+  transition: transform 0.3s ease;
+}
+
+.course-menu-item:hover .arrow {
+  transform: translateX(8px);
+}
 
 /* ------------------------------------------- course box -------------------------------------------------- */
 
