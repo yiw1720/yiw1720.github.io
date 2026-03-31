@@ -1,13 +1,19 @@
 // this is where I store data for curriculumns
+let currentView = "lesson"; // default is course main page
 
 //////////////////////////////////////// Lesson data /////////////////////////////////
 
 const lessonData = {
   courseTitle: "Calculus",
+
+  courseIntro: {
+    heading: "Welcome to Calculus",
+    text: "This course introduces limits, continuity, derivatives, and how mathematical ideas connect into a system of thinking."
+  },
+
   lessonLabel: "Mathera · Unit 1",
   lessonTitle: "Lesson 1: Limits",
   lessonSubtitle: "Understand what a function approaches and why limits begin the language of calculus.",
-
   units: [
     {
       unitName: "Unit 1",
@@ -55,14 +61,59 @@ const lessonData = {
       content: "Limits prepare you for continuity and derivatives."
     }
   ]
-};
+};  // end of lessonData
+
 /////////////////////////////////// Fill ///////////////////////////////////////////
 
-document.getElementById("course-title").textContent = lessonData.courseTitle;
-document.getElementById("lesson-label").textContent = lessonData.lessonLabel;
-document.getElementById("lesson-title").textContent = lessonData.lessonTitle;
-document.getElementById("lesson-subtitle").textContent = lessonData.lessonSubtitle;
+// document.getElementById("course-title").textContent = lessonData.courseTitle;
+// document.getElementById("lesson-label").textContent = lessonData.lessonLabel;
+// document.getElementById("lesson-title").textContent = lessonData.lessonTitle;
+// document.getElementById("lesson-subtitle").textContent = lessonData.lessonSubtitle;
+function renderCourseIntro() {
+  document.getElementById("lesson-label").textContent = "Mathera · Course";
+  document.getElementById("lesson-title").textContent = lessonData.courseTitle;
+  document.getElementById("lesson-subtitle").textContent = lessonData.courseIntro.text;
 
+  // clear sections
+  document.getElementById("learn").innerHTML = "";
+  document.getElementById("quiz").innerHTML = "";
+  document.getElementById("review").innerHTML = "";
+
+  // add intro card
+  const introCard = document.createElement("div");
+  introCard.classList.add("content-card");
+
+  const heading = document.createElement("h2");
+  heading.textContent = lessonData.courseIntro.heading;
+
+  const text = document.createElement("p");
+  text.textContent = lessonData.courseIntro.text;
+
+  introCard.appendChild(heading);
+  introCard.appendChild(text);
+
+  document.getElementById("learn").appendChild(introCard);
+}
+
+
+function renderPage() {
+  if (currentView === "course") {
+    renderCourseIntro();
+  } else {
+    renderLesson();
+  }
+}
+
+
+const courseTitleEl = document.getElementById("course-title");
+courseTitleEl.textContent = lessonData.courseTitle;
+
+courseTitleEl.style.cursor = "pointer";
+
+courseTitleEl.addEventListener("click", () => {
+  currentView = "course";
+  renderPage();
+});
 ///////////////////////////////////// build the side bar /////////////////////////
 
 const unitList = document.getElementById("unit-list");
@@ -82,6 +133,11 @@ lessonData.units.forEach((unit) => {
 
     lessonLink.href = "#";
     lessonLink.textContent = lesson;
+
+    lessonLink.addEventListener("click", () => {
+    currentView = "lesson";
+    renderPage();
+    });
 
     lessonLi.appendChild(lessonLink);
     lessonUl.appendChild(lessonLi);
@@ -139,3 +195,6 @@ buttons.forEach((button) => {
     document.getElementById(selectedMode).classList.add("active-section");
   });
 });
+
+
+renderPage();
