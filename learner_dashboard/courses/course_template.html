@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathera Lesson Template</title>
+  <link rel="stylesheet" href="lesson.css">
+</head>
+<body>
+
+  <div class="lesson-page">
+
+    <!-- Sidebar -->
+    <aside class="lesson-sidebar">
+      <h2 id="course-title"></h2>
+      <div id="unit-list"></div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="lesson-main">
+      <header class="lesson-header">
+        <p id="lesson-label"></p>
+        <h1 id="lesson-title"></h1>
+        <p id="lesson-subtitle"></p>
+      </header>
+
+      <!-- Mode buttons -->
+      <div class="mode-switch">
+        <button class="mode-btn active" data-mode="learn">Learn</button>
+        <button class="mode-btn" data-mode="quiz">Quiz</button>
+        <button class="mode-btn" data-mode="review">Review</button>
+      </div>
+
+      <!-- Content sections -->
+      <section id="learn" class="mode-section active-section"></section>
+      <section id="quiz" class="mode-section"></section>
+      <section id="review" class="mode-section"></section>
+    </main>
+
+  </div>
+
+  <script src="lesson.js"></script>
+</body>
+</html>
