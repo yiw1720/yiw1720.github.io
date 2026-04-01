@@ -75,10 +75,10 @@ singleVariableCalculus: {
 // 18.06
 
 linearAlgebra: {
-    courseTitle: "18.01 Singe Variable Calculus",
+    courseTitle: "18.06 Linear Algebra",
 
     courseIntro: {
-        heading: "Welcome to Calculus",
+        heading: "Welcome to linear algebra!",
         text: "This course introduces limits, continuity, derivatives, and how mathematical ideas connect into a system of thinking."
     },
 
