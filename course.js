@@ -2,12 +2,14 @@
 
 //////////////////////////////////////////////////////////// Page state //////////////////////////////////////////////////////////
 
+// coursesData = all courses
+// courseData = the one currently loaded into the template
 
 //////////////////////////////////////////////////////////// Course + lesson data //////////////////////////////////////////////////////////
 
 const coursesData = {
 singleVariableCalculus: {
-    courseTitle: "18.01 Singe Variable Calculus",
+    courseTitle: "18.01 Single Variable Calculus",
 
     courseIntro: {
         heading: "Welcome to Calculus",
@@ -71,8 +73,76 @@ singleVariableCalculus: {
         }
     ]
 },// end of 18.01
+// start of 18.02
 
-// 18.06
+multivariableCalculus: {
+    courseTitle: "18.02 Multivariable Calculus",
+
+    courseIntro: {
+        heading: "Welcome to Multivariable Calculus!",
+        text: "This is the brief outline for topics in 18.02"
+    },
+
+    lessonLabel: "18.02 · Unit 1",
+    lessonTitle: "Lesson 1: sth.",
+    lessonSubtitle:
+        "Describe the lesson",
+
+    units: [
+        {
+        unitName: "Unit 1",
+        lessons: ["Lesson 1: Limits", "Lesson 2: Continuity"]
+        },
+        {
+        unitName: "Unit 2",
+        lessons: ["Lesson 3: Derivatives", "Lesson 4: Applications"]
+        }
+    ],
+
+    learn: [
+        {
+        heading: "Concept Overview",
+        content:
+            "A limit describes the value a function approaches as the input gets closer and closer to a certain number."
+        },
+        {
+        heading: "Why It Matters",
+        content:
+            "Limits help us study behavior near a point, even when direct substitution does not immediately help."
+        },
+        {
+        heading: "Mindmap Connection",
+        content:
+            "Limits connect algebra, graph behavior, continuity, and derivatives."
+        }
+    ],
+
+    quiz: [
+        {
+        heading: "Quick Check",
+        content: "What does a limit describe?"
+        },
+        {
+        heading: "Think About This",
+        content:
+            "Why might the value at a point be different from the limit near that point?"
+        }
+    ],
+
+    review: [
+        {
+        heading: "Summary",
+        content: "A limit studies approach behavior, not just exact value."
+        },
+        {
+        heading: "Key Connection",
+        content: "Limits prepare you for continuity and derivatives."
+        }
+    ]
+
+}, // end of 18.02
+
+// start of 18.06
 
 linearAlgebra: {
     courseTitle: "18.06 Linear Algebra",
@@ -82,7 +152,7 @@ linearAlgebra: {
         text: "This course introduces limits, continuity, derivatives, and how mathematical ideas connect into a system of thinking."
     },
 
-    lessonLabel: "18.01 · Unit 1",
+    lessonLabel: "18.06 · Unit 1",
     lessonTitle: "Lesson 1: Limits",
     lessonSubtitle:
         "Understand what a function approaches and why limits begin the language of calculus.",
@@ -142,11 +212,8 @@ linearAlgebra: {
 
 }; ////////////////////////////////////////////////////////end of coursesData
 
-// coursesData = all courses
-// courseData = the one currently loaded into the template
-
 const params = new URLSearchParams(window.location.search);
-const currentCourseKey = params.get("course") || "calculus";
+const currentCourseKey = params.get("course") || "singleVariableCalculus";
 
 let courseData = coursesData[currentCourseKey];
 let currentView = "course"; // default page is the course intro page
@@ -207,8 +274,8 @@ function fillSection(sectionElement, dataArray) {
 
 function renderCourseIntro() {
   lessonLabelEl.textContent = "Mathera · Course";
-  lessonTitleEl.textContent = coursesData.courseTitle;
-  lessonSubtitleEl.textContent = coursesData.courseIntro.text;
+  lessonTitleEl.textContent = courseData.courseTitle;
+  lessonSubtitleEl.textContent = courseData.courseIntro.text;
 
   clearSections();
   resetModeButtons();
@@ -217,10 +284,10 @@ function renderCourseIntro() {
   introCard.classList.add("content-card");
 
   const heading = document.createElement("h2");
-  heading.textContent = coursesData.courseIntro.heading;
+  heading.textContent = courseData.courseIntro.heading;
 
   const text = document.createElement("p");
-  text.textContent = coursesData.courseIntro.text;
+  text.textContent = courseData.courseIntro.text;
 
   introCard.appendChild(heading);
   introCard.appendChild(text);
@@ -229,16 +296,16 @@ function renderCourseIntro() {
 }
 
 function renderLesson() {
-  lessonLabelEl.textContent = coursesData.lessonLabel;
-  lessonTitleEl.textContent = coursesData.lessonTitle;
-  lessonSubtitleEl.textContent = coursesData.lessonSubtitle;
+  lessonLabelEl.textContent = courseData.lessonLabel;
+  lessonTitleEl.textContent = courseData.lessonTitle;
+  lessonSubtitleEl.textContent = courseData.lessonSubtitle;
 
   clearSections();
   resetModeButtons();
 
-  fillSection(learnSection, coursesData.learn);
-  fillSection(quizSection, coursesData.quiz);
-  fillSection(reviewSection, coursesData.review);
+  fillSection(learnSection, courseData.learn);
+  fillSection(quizSection, courseData.quiz);
+  fillSection(reviewSection, courseData.review);
 }
 
 function renderPage() {
@@ -252,7 +319,7 @@ function renderPage() {
 //////////////////////////////////////////////////////////// Build sidebar //////////////////////////////////////////////////////////
 
 function buildSidebar() {
-  courseTitleEl.textContent = coursesData.courseTitle;
+  courseTitleEl.textContent = courseData.courseTitle;
   courseTitleEl.style.cursor = "pointer";
 
   courseTitleEl.addEventListener("click", () => {
@@ -262,7 +329,7 @@ function buildSidebar() {
 
   unitList.innerHTML = "";
 
-  coursesData.units.forEach((unit) => {
+  courseData.units.forEach((unit) => {
     const unitBlock = document.createElement("div");
     unitBlock.classList.add("unit-block");
 
