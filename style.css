@@ -428,6 +428,13 @@ body {
 }
 
 /* --------------------------------- hero slogan ------------------------------------- */
+.quote-box-bg {
+  position: absolute;
+  max-height: 250px;
+  background: linear-gradient(135deg, rgba(219,234,254,0.95), rgba(96,165,250,0.9));
+}
+/* above: wish to but not complete*/
+
 .quote-box {
   quotes: "“" "”";
   position:relative;
@@ -436,7 +443,6 @@ body {
   color: #333333;
   max-width: 800px;
   padding: 40px 60px;
-  
 }
 
 .quote-box::before {
