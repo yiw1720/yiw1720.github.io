@@ -1,84 +1,158 @@
 // this is where I store data for curriculums
 
-//////////////////////////////////////////////////////////
-// Page state
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// Page state //////////////////////////////////////////////////////////
 
+
+//////////////////////////////////////////////////////////// Course + lesson data //////////////////////////////////////////////////////////
+
+const coursesData = {
+singleVariableCalculus: {
+    courseTitle: "18.01 Singe Variable Calculus",
+
+    courseIntro: {
+        heading: "Welcome to Calculus",
+        text: "This course introduces limits, continuity, derivatives, and how mathematical ideas connect into a system of thinking."
+    },
+
+    lessonLabel: "18.01 · Unit 1",
+    lessonTitle: "Lesson 1: Limits",
+    lessonSubtitle:
+        "Understand what a function approaches and why limits begin the language of calculus.",
+
+    units: [
+        {
+        unitName: "Unit 1",
+        lessons: ["Lesson 1: Limits", "Lesson 2: Continuity"]
+        },
+        {
+        unitName: "Unit 2",
+        lessons: ["Lesson 3: Derivatives", "Lesson 4: Applications"]
+        }
+    ],
+
+    learn: [
+        {
+        heading: "Concept Overview",
+        content:
+            "A limit describes the value a function approaches as the input gets closer and closer to a certain number."
+        },
+        {
+        heading: "Why It Matters",
+        content:
+            "Limits help us study behavior near a point, even when direct substitution does not immediately help."
+        },
+        {
+        heading: "Mindmap Connection",
+        content:
+            "Limits connect algebra, graph behavior, continuity, and derivatives."
+        }
+    ],
+
+    quiz: [
+        {
+        heading: "Quick Check",
+        content: "What does a limit describe?"
+        },
+        {
+        heading: "Think About This",
+        content:
+            "Why might the value at a point be different from the limit near that point?"
+        }
+    ],
+
+    review: [
+        {
+        heading: "Summary",
+        content: "A limit studies approach behavior, not just exact value."
+        },
+        {
+        heading: "Key Connection",
+        content: "Limits prepare you for continuity and derivatives."
+        }
+    ]
+},// end of 18.01
+
+// 18.06
+
+linearAlgebra: {
+    courseTitle: "18.01 Singe Variable Calculus",
+
+    courseIntro: {
+        heading: "Welcome to Calculus",
+        text: "This course introduces limits, continuity, derivatives, and how mathematical ideas connect into a system of thinking."
+    },
+
+    lessonLabel: "18.01 · Unit 1",
+    lessonTitle: "Lesson 1: Limits",
+    lessonSubtitle:
+        "Understand what a function approaches and why limits begin the language of calculus.",
+
+    units: [
+        {
+        unitName: "Unit 1",
+        lessons: ["Lesson 1: Limits", "Lesson 2: Continuity"]
+        },
+        {
+        unitName: "Unit 2",
+        lessons: ["Lesson 3: Derivatives", "Lesson 4: Applications"]
+        }
+    ],
+
+    learn: [
+        {
+        heading: "Concept Overview",
+        content:
+            "A limit describes the value a function approaches as the input gets closer and closer to a certain number."
+        },
+        {
+        heading: "Why It Matters",
+        content:
+            "Limits help us study behavior near a point, even when direct substitution does not immediately help."
+        },
+        {
+        heading: "Mindmap Connection",
+        content:
+            "Limits connect algebra, graph behavior, continuity, and derivatives."
+        }
+    ],
+
+    quiz: [
+        {
+        heading: "Quick Check",
+        content: "What does a limit describe?"
+        },
+        {
+        heading: "Think About This",
+        content:
+            "Why might the value at a point be different from the limit near that point?"
+        }
+    ],
+
+    review: [
+        {
+        heading: "Summary",
+        content: "A limit studies approach behavior, not just exact value."
+        },
+        {
+        heading: "Key Connection",
+        content: "Limits prepare you for continuity and derivatives."
+        }
+    ]
+}// end of 18.01
+
+}; ////////////////////////////////////////////////////////end of coursesData
+
+// coursesData = all courses
+// courseData = the one currently loaded into the template
+
+const params = new URLSearchParams(window.location.search);
+const currentCourseKey = params.get("course") || "calculus";
+
+let courseData = coursesData[currentCourseKey];
 let currentView = "course"; // default page is the course intro page
 
-//////////////////////////////////////////////////////////
-// Course + lesson data
-//////////////////////////////////////////////////////////
 
-const lessonData = {
-  courseTitle: "18.01 Singe Variable Calculus",
-
-  courseIntro: {
-    heading: "Welcome to Calculus",
-    text: "This course introduces limits, continuity, derivatives, and how mathematical ideas connect into a system of thinking."
-  },
-
-  lessonLabel: "18.01 · Unit 1",
-  lessonTitle: "Lesson 1: Limits",
-  lessonSubtitle:
-    "Understand what a function approaches and why limits begin the language of calculus.",
-
-  units: [
-    {
-      unitName: "Unit 1",
-      lessons: ["Lesson 1: Limits", "Lesson 2: Continuity"]
-    },
-    {
-      unitName: "Unit 2",
-      lessons: ["Lesson 3: Derivatives", "Lesson 4: Applications"]
-    }
-  ],
-
-  learn: [
-    {
-      heading: "Concept Overview",
-      content:
-        "A limit describes the value a function approaches as the input gets closer and closer to a certain number."
-    },
-    {
-      heading: "Why It Matters",
-      content:
-        "Limits help us study behavior near a point, even when direct substitution does not immediately help."
-    },
-    {
-      heading: "Mindmap Connection",
-      content:
-        "Limits connect algebra, graph behavior, continuity, and derivatives."
-    }
-  ],
-
-  quiz: [
-    {
-      heading: "Quick Check",
-      content: "What does a limit describe?"
-    },
-    {
-      heading: "Think About This",
-      content:
-        "Why might the value at a point be different from the limit near that point?"
-    }
-  ],
-
-  review: [
-    {
-      heading: "Summary",
-      content: "A limit studies approach behavior, not just exact value."
-    },
-    {
-      heading: "Key Connection",
-      content: "Limits prepare you for continuity and derivatives."
-    }
-  ]
-};
-
-//////////////////////////////////////////////////////////
-// Grab important elements once
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// Grab important elements once //////////////////////////////////////////////////////////
 
 const courseTitleEl = document.getElementById("course-title");
 const lessonLabelEl = document.getElementById("lesson-label");
@@ -94,9 +168,7 @@ const reviewSection = document.getElementById("review");
 const buttons = document.querySelectorAll(".mode-btn");
 const sections = document.querySelectorAll(".mode-section");
 
-//////////////////////////////////////////////////////////
-// Small helper functions
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// Small helper functions //////////////////////////////////////////////////////////
 
 function clearSections() {
   learnSection.innerHTML = "";
@@ -131,14 +203,12 @@ function fillSection(sectionElement, dataArray) {
   });
 }
 
-//////////////////////////////////////////////////////////
-// Render functions
-//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////// Render functions //////////////////////////////////////////////////////////
 
 function renderCourseIntro() {
   lessonLabelEl.textContent = "Mathera · Course";
-  lessonTitleEl.textContent = lessonData.courseTitle;
-  lessonSubtitleEl.textContent = lessonData.courseIntro.text;
+  lessonTitleEl.textContent = coursesData.courseTitle;
+  lessonSubtitleEl.textContent = coursesData.courseIntro.text;
 
   clearSections();
   resetModeButtons();
@@ -147,10 +217,10 @@ function renderCourseIntro() {
   introCard.classList.add("content-card");
 
   const heading = document.createElement("h2");
-  heading.textContent = lessonData.courseIntro.heading;
+  heading.textContent = coursesData.courseIntro.heading;
 
   const text = document.createElement("p");
-  text.textContent = lessonData.courseIntro.text;
+  text.textContent = coursesData.courseIntro.text;
 
   introCard.appendChild(heading);
   introCard.appendChild(text);
@@ -159,16 +229,16 @@ function renderCourseIntro() {
 }
 
 function renderLesson() {
-  lessonLabelEl.textContent = lessonData.lessonLabel;
-  lessonTitleEl.textContent = lessonData.lessonTitle;
-  lessonSubtitleEl.textContent = lessonData.lessonSubtitle;
+  lessonLabelEl.textContent = coursesData.lessonLabel;
+  lessonTitleEl.textContent = coursesData.lessonTitle;
+  lessonSubtitleEl.textContent = coursesData.lessonSubtitle;
 
   clearSections();
   resetModeButtons();
 
-  fillSection(learnSection, lessonData.learn);
-  fillSection(quizSection, lessonData.quiz);
-  fillSection(reviewSection, lessonData.review);
+  fillSection(learnSection, coursesData.learn);
+  fillSection(quizSection, coursesData.quiz);
+  fillSection(reviewSection, coursesData.review);
 }
 
 function renderPage() {
@@ -179,12 +249,10 @@ function renderPage() {
   }
 }
 
-//////////////////////////////////////////////////////////
-// Build sidebar
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// Build sidebar //////////////////////////////////////////////////////////
 
 function buildSidebar() {
-  courseTitleEl.textContent = lessonData.courseTitle;
+  courseTitleEl.textContent = coursesData.courseTitle;
   courseTitleEl.style.cursor = "pointer";
 
   courseTitleEl.addEventListener("click", () => {
@@ -194,7 +262,7 @@ function buildSidebar() {
 
   unitList.innerHTML = "";
 
-  lessonData.units.forEach((unit) => {
+  coursesData.units.forEach((unit) => {
     const unitBlock = document.createElement("div");
     unitBlock.classList.add("unit-block");
 
@@ -226,9 +294,7 @@ function buildSidebar() {
   });
 }
 
-//////////////////////////////////////////////////////////
-// Mode switch buttons
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// Mode switch buttons //////////////////////////////////////////////////////////
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -242,9 +308,7 @@ buttons.forEach((button) => {
   });
 });
 
-//////////////////////////////////////////////////////////
-// Start page
-//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// Start page //////////////////////////////////////////////////////////
 
 buildSidebar();
 renderPage();
