@@ -1,19 +1,28 @@
-// this is where I store data for curriculumns
-let currentView = "lesson"; // default is course main page
+// this is where I store data for curriculums
 
-//////////////////////////////////////// Lesson data /////////////////////////////////
+//////////////////////////////////////////////////////////
+// Page state
+//////////////////////////////////////////////////////////
+
+let currentView = "course"; // default page is the course intro page
+
+//////////////////////////////////////////////////////////
+// Course + lesson data
+//////////////////////////////////////////////////////////
 
 const lessonData = {
-  courseTitle: "Calculus",
+  courseTitle: "18.01 Singe Variable Calculus",
 
   courseIntro: {
     heading: "Welcome to Calculus",
     text: "This course introduces limits, continuity, derivatives, and how mathematical ideas connect into a system of thinking."
   },
 
-  lessonLabel: "Mathera · Unit 1",
+  lessonLabel: "18.01 · Unit 1",
   lessonTitle: "Lesson 1: Limits",
-  lessonSubtitle: "Understand what a function approaches and why limits begin the language of calculus.",
+  lessonSubtitle:
+    "Understand what a function approaches and why limits begin the language of calculus.",
+
   units: [
     {
       unitName: "Unit 1",
@@ -28,15 +37,18 @@ const lessonData = {
   learn: [
     {
       heading: "Concept Overview",
-      content: "A limit describes the value a function approaches as the input gets closer and closer to a certain number."
+      content:
+        "A limit describes the value a function approaches as the input gets closer and closer to a certain number."
     },
     {
       heading: "Why It Matters",
-      content: "Limits help us study behavior near a point, even when direct substitution does not immediately help."
+      content:
+        "Limits help us study behavior near a point, even when direct substitution does not immediately help."
     },
     {
       heading: "Mindmap Connection",
-      content: "Limits connect algebra, graph behavior, continuity, and derivatives."
+      content:
+        "Limits connect algebra, graph behavior, continuity, and derivatives."
     }
   ],
 
@@ -47,7 +59,8 @@ const lessonData = {
     },
     {
       heading: "Think About This",
-      content: "Why might the value at a point be different from the limit near that point?"
+      content:
+        "Why might the value at a point be different from the limit near that point?"
     }
   ],
 
@@ -61,98 +74,46 @@ const lessonData = {
       content: "Limits prepare you for continuity and derivatives."
     }
   ]
-};  // end of lessonData
+};
 
-/////////////////////////////////// Fill ///////////////////////////////////////////
-
-// document.getElementById("course-title").textContent = lessonData.courseTitle;
-// document.getElementById("lesson-label").textContent = lessonData.lessonLabel;
-// document.getElementById("lesson-title").textContent = lessonData.lessonTitle;
-// document.getElementById("lesson-subtitle").textContent = lessonData.lessonSubtitle;
-function renderCourseIntro() {
-  document.getElementById("lesson-label").textContent = "Mathera · Course";
-  document.getElementById("lesson-title").textContent = lessonData.courseTitle;
-  document.getElementById("lesson-subtitle").textContent = lessonData.courseIntro.text;
-
-  // clear sections
-  document.getElementById("learn").innerHTML = "";
-  document.getElementById("quiz").innerHTML = "";
-  document.getElementById("review").innerHTML = "";
-
-  // add intro card
-  const introCard = document.createElement("div");
-  introCard.classList.add("content-card");
-
-  const heading = document.createElement("h2");
-  heading.textContent = lessonData.courseIntro.heading;
-
-  const text = document.createElement("p");
-  text.textContent = lessonData.courseIntro.text;
-
-  introCard.appendChild(heading);
-  introCard.appendChild(text);
-
-  document.getElementById("learn").appendChild(introCard);
-}
-
-
-function renderPage() {
-  if (currentView === "course") {
-    renderCourseIntro();
-  } else {
-    renderLesson();
-  }
-}
-
+//////////////////////////////////////////////////////////
+// Grab important elements once
+//////////////////////////////////////////////////////////
 
 const courseTitleEl = document.getElementById("course-title");
-courseTitleEl.textContent = lessonData.courseTitle;
-
-courseTitleEl.style.cursor = "pointer";
-
-courseTitleEl.addEventListener("click", () => {
-  currentView = "course";
-  renderPage();
-});
-///////////////////////////////////// build the side bar /////////////////////////
+const lessonLabelEl = document.getElementById("lesson-label");
+const lessonTitleEl = document.getElementById("lesson-title");
+const lessonSubtitleEl = document.getElementById("lesson-subtitle");
 
 const unitList = document.getElementById("unit-list");
 
-lessonData.units.forEach((unit) => {
-  const unitBlock = document.createElement("div");
-  unitBlock.classList.add("unit-block");
+const learnSection = document.getElementById("learn");
+const quizSection = document.getElementById("quiz");
+const reviewSection = document.getElementById("review");
 
-  const unitTitle = document.createElement("h3");
-  unitTitle.textContent = unit.unitName;
+const buttons = document.querySelectorAll(".mode-btn");
+const sections = document.querySelectorAll(".mode-section");
 
-  const lessonUl = document.createElement("ul");
+//////////////////////////////////////////////////////////
+// Small helper functions
+//////////////////////////////////////////////////////////
 
-  unit.lessons.forEach((lesson) => {
-    const lessonLi = document.createElement("li");
-    const lessonLink = document.createElement("a");
+function clearSections() {
+  learnSection.innerHTML = "";
+  quizSection.innerHTML = "";
+  reviewSection.innerHTML = "";
+}
 
-    lessonLink.href = "#";
-    lessonLink.textContent = lesson;
+function resetModeButtons() {
+  buttons.forEach((btn) => btn.classList.remove("active"));
+  sections.forEach((section) => section.classList.remove("active-section"));
 
-    lessonLink.addEventListener("click", () => {
-    currentView = "lesson";
-    renderPage();
-    });
+  document.querySelector('[data-mode="learn"]').classList.add("active");
+  learnSection.classList.add("active-section");
+}
 
-    lessonLi.appendChild(lessonLink);
-    lessonUl.appendChild(lessonLi);
-  });
-
-  unitBlock.appendChild(unitTitle);
-  unitBlock.appendChild(lessonUl);
-  unitList.appendChild(unitBlock);
-});
-
-
-/////////////////////////////////////////// Quiz / review version //////////////////////////////////
-
-function fillSection(sectionId, dataArray) {
-  const section = document.getElementById(sectionId);
+function fillSection(sectionElement, dataArray) {
+  sectionElement.innerHTML = "";
 
   dataArray.forEach((item) => {
     const card = document.createElement("div");
@@ -166,35 +127,124 @@ function fillSection(sectionId, dataArray) {
 
     card.appendChild(heading);
     card.appendChild(paragraph);
-    section.appendChild(card);
+    sectionElement.appendChild(card);
   });
 }
 
-fillSection("learn", lessonData.learn);
-fillSection("quiz", lessonData.quiz);
-fillSection("review", lessonData.review);
+//////////////////////////////////////////////////////////
+// Render functions
+//////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////// model switch button //////////////////////////////////////
+function renderCourseIntro() {
+  lessonLabelEl.textContent = "Mathera · Course";
+  lessonTitleEl.textContent = lessonData.courseTitle;
+  lessonSubtitleEl.textContent = lessonData.courseIntro.text;
 
-const buttons = document.querySelectorAll(".mode-btn");
-const sections = document.querySelectorAll(".mode-section");
+  clearSections();
+  resetModeButtons();
+
+  const introCard = document.createElement("div");
+  introCard.classList.add("content-card");
+
+  const heading = document.createElement("h2");
+  heading.textContent = lessonData.courseIntro.heading;
+
+  const text = document.createElement("p");
+  text.textContent = lessonData.courseIntro.text;
+
+  introCard.appendChild(heading);
+  introCard.appendChild(text);
+
+  learnSection.appendChild(introCard);
+}
+
+function renderLesson() {
+  lessonLabelEl.textContent = lessonData.lessonLabel;
+  lessonTitleEl.textContent = lessonData.lessonTitle;
+  lessonSubtitleEl.textContent = lessonData.lessonSubtitle;
+
+  clearSections();
+  resetModeButtons();
+
+  fillSection(learnSection, lessonData.learn);
+  fillSection(quizSection, lessonData.quiz);
+  fillSection(reviewSection, lessonData.review);
+}
+
+function renderPage() {
+  if (currentView === "course") {
+    renderCourseIntro();
+  } else if (currentView === "lesson") {
+    renderLesson();
+  }
+}
+
+//////////////////////////////////////////////////////////
+// Build sidebar
+//////////////////////////////////////////////////////////
+
+function buildSidebar() {
+  courseTitleEl.textContent = lessonData.courseTitle;
+  courseTitleEl.style.cursor = "pointer";
+
+  courseTitleEl.addEventListener("click", () => {
+    currentView = "course";
+    renderPage();
+  });
+
+  unitList.innerHTML = "";
+
+  lessonData.units.forEach((unit) => {
+    const unitBlock = document.createElement("div");
+    unitBlock.classList.add("unit-block");
+
+    const unitTitle = document.createElement("h3");
+    unitTitle.textContent = unit.unitName;
+
+    const lessonUl = document.createElement("ul");
+
+    unit.lessons.forEach((lesson) => {
+      const lessonLi = document.createElement("li");
+      const lessonLink = document.createElement("a");
+
+      lessonLink.href = "#";
+      lessonLink.textContent = lesson;
+
+      lessonLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        currentView = "lesson";
+        renderPage();
+      });
+
+      lessonLi.appendChild(lessonLink);
+      lessonUl.appendChild(lessonLi);
+    });
+
+    unitBlock.appendChild(unitTitle);
+    unitBlock.appendChild(lessonUl);
+    unitList.appendChild(unitBlock);
+  });
+}
+
+//////////////////////////////////////////////////////////
+// Mode switch buttons
+//////////////////////////////////////////////////////////
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const selectedMode = button.dataset.mode;
 
-    buttons.forEach((btn) => {
-      btn.classList.remove("active");
-    });
-
-    sections.forEach((section) => {
-      section.classList.remove("active-section");
-    });
+    buttons.forEach((btn) => btn.classList.remove("active"));
+    sections.forEach((section) => section.classList.remove("active-section"));
 
     button.classList.add("active");
     document.getElementById(selectedMode).classList.add("active-section");
   });
 });
 
+//////////////////////////////////////////////////////////
+// Start page
+//////////////////////////////////////////////////////////
 
+buildSidebar();
 renderPage();
