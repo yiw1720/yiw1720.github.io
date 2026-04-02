@@ -1,14 +1,21 @@
-const lessonParams = new URLSearchParams(window.location.search);
-const lessonCourseKey = lessonParams.get("course") || "singleVariableCalculus";
-const lessonId = lessonParams.get("lesson") || "limits";
+const params = new URLSearchParams(window.location.search);
+const currentCourseKey = params.get("course") || "singleVariableCalculus";
+const currentLessonId = params.get("lesson") || "limits";
 
-const lessonCourseData = coursesData[lessonCourseKey] || coursesData.singleVariableCalculus;
-const lessonData = lessonCourseData.lessons[lessonId] || lessonCourseData.lessons[Object.keys(lessonCourseData.lessons)[0]];
+const courseData = coursesData[currentCourseKey] || coursesData.singleVariableCalculus;
+const lessonData =
+  courseData.lessons[currentLessonId] ||
+  courseData.lessons[Object.keys(courseData.lessons)[0]];
 
-const lessonLabelEl2 = document.getElementById("lesson-label");
-const lessonTitleEl2 = document.getElementById("lesson-title");
-const lessonSubtitleEl2 = document.getElementById("lesson-subtitle");
+// lesson header
+const courseTitleEl = document.getElementById("course-title");
+const unitList = document.getElementById("unit-list");
 
+const lessonLabelEl = document.getElementById("lesson-label");
+const lessonTitleEl = document.getElementById("lesson-title");
+const lessonSubtitleEl = document.getElementById("lesson-subtitle");
+
+// mode sections
 const learnSection = document.getElementById("learn");
 const quizSection = document.getElementById("quiz");
 const reviewSection = document.getElementById("review");
@@ -36,9 +43,9 @@ function fillSection(sectionElement, dataArray) {
 }
 
 function renderLessonPage() {
-  lessonLabelEl2.textContent = lessonData.label;
-  lessonTitleEl2.textContent = lessonData.title;
-  lessonSubtitleEl2.textContent = lessonData.subtitle;
+  lessonLabelEl.textContent = lessonData.label;
+  lessonTitleEl.textContent = lessonData.title;
+  lessonSubtitleEl.textContent = lessonData.subtitle;
 
   fillSection(learnSection, lessonData.learn);
   fillSection(quizSection, lessonData.quiz);
@@ -54,6 +61,45 @@ function switchMode(mode) {
     section.classList.toggle("active-section", section.id === mode);
   });
 }
+function buildSidebar() {
+  courseTitleEl.textContent = courseData.courseTitle;
+  courseTitleEl.style.cursor = "pointer";
+
+  courseTitleEl.addEventListener("click", () => {
+    window.location.href = `course_template.html?course=${currentCourseKey}`;
+  });
+
+  unitList.innerHTML = "";
+
+  courseData.units.forEach((unit) => {
+    const unitBlock = document.createElement("div");
+    unitBlock.classList.add("unit-block");
+
+    const unitTitle = document.createElement("h3");
+    unitTitle.textContent = unit.unitName;
+
+    const lessonUl = document.createElement("ul");
+
+    unit.lessons.forEach((lesson) => {
+      const lessonLi = document.createElement("li");
+      const lessonLink = document.createElement("a");
+
+      lessonLink.href = `lesson_template.html?course=${currentCourseKey}&lesson=${lesson.id}`;
+      lessonLink.textContent = lesson.title;
+
+      if (lesson.id === currentLessonId) {
+        lessonLink.classList.add("selected-lesson");
+      }
+
+      lessonLi.appendChild(lessonLink);
+      lessonUl.appendChild(lessonLi);
+    });
+
+    unitBlock.appendChild(unitTitle);
+    unitBlock.appendChild(lessonUl);
+    unitList.appendChild(unitBlock);
+  });
+}
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -61,5 +107,6 @@ buttons.forEach((button) => {
   });
 });
 
+buildSidebar();
 renderLessonPage();
 switchMode("learn");

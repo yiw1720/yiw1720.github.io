@@ -1,19 +1,8 @@
-
-//////////////////////////////////////////////////////////// Page state //////////////////////////////////////////////////////////
-
-// coursesData = all courses
-// courseData = the one currently loaded into the template
-
-// architecture : data.js --> course_template.js --> lesson_template.js
-
-
 const params = new URLSearchParams(window.location.search);
 const currentCourseKey = params.get("course") || "singleVariableCalculus";
+const currentLessonId = params.get("lesson");
 
 const courseData = coursesData[currentCourseKey] || coursesData.singleVariableCalculus;
-
-// default selected lesson = first lesson in first unit
-let selectedLessonId = courseData.units[0].lessons[0].id;
 
 const courseTitleEl = document.getElementById("course-title");
 const lessonLabelEl = document.getElementById("lesson-label");
@@ -23,18 +12,14 @@ const unitList = document.getElementById("unit-list");
 const startBtn = document.getElementById("start-btn");
 const lessonMain = document.querySelector(".lesson-main");
 
-function getSelectedLessonData() {
-  return courseData.lessons[selectedLessonId];
+function getStartLessonId() {
+  if (currentLessonId && courseData.lessons[currentLessonId]) {
+    return currentLessonId;
+  }
+  return courseData.units[0].lessons[0].id;
 }
 
 function renderOverview() {
-  const lessonData = getSelectedLessonData();
-
-  lessonLabelEl.textContent = "Mathera · Course Overview";
-  lessonTitleEl.textContent = lessonData.title;
-  lessonSubtitleEl.textContent = lessonData.subtitle;
-
-  // remove old dynamic overview block if it exists
   const oldOverview = document.getElementById("lesson-overview-card");
   if (oldOverview) {
     oldOverview.remove();
@@ -44,27 +29,54 @@ function renderOverview() {
   overviewCard.classList.add("content-card");
   overviewCard.id = "lesson-overview-card";
 
-  const overviewHeading = document.createElement("h2");
-  overviewHeading.textContent = lessonData.overview.heading;
+  let headingText = "";
+  let bodyText = "";
+  let powerPoints = [];
 
-  const overviewText = document.createElement("p");
-  overviewText.textContent = lessonData.overview.text;
+  if (currentLessonId && courseData.lessons[currentLessonId]) {
+    const lessonData = courseData.lessons[currentLessonId];
 
-  const powerPointsHeading = document.createElement("h2");
-  powerPointsHeading.textContent = "Power Points";
+    lessonLabelEl.textContent = "Mathera · Lesson Overview";
+    lessonTitleEl.textContent = lessonData.title;
+    lessonSubtitleEl.textContent = lessonData.subtitle;
 
-  const powerPointsList = document.createElement("ul");
+    headingText = lessonData.overview.heading;
+    bodyText = lessonData.overview.text;
+    powerPoints = lessonData.powerPoints;
+  } else {
+    lessonLabelEl.textContent = "Mathera · Course Overview";
+    lessonTitleEl.textContent = courseData.courseTitle;
+    lessonSubtitleEl.textContent = courseData.courseIntro.text;
 
-  lessonData.powerPoints.forEach((point) => {
-    const li = document.createElement("li");
-    li.textContent = point;
-    powerPointsList.appendChild(li);
-  });
+    headingText = courseData.courseIntro.heading;
+    bodyText = courseData.courseIntro.text;
+    powerPoints = [];
+  }
 
-  overviewCard.appendChild(overviewHeading);
-  overviewCard.appendChild(overviewText);
-  overviewCard.appendChild(powerPointsHeading);
-  overviewCard.appendChild(powerPointsList);
+  const heading = document.createElement("h2");
+  heading.textContent = headingText;
+
+  const text = document.createElement("p");
+  text.textContent = bodyText;
+
+  overviewCard.appendChild(heading);
+  overviewCard.appendChild(text);
+
+  if (powerPoints.length > 0) {
+    const powerPointsHeading = document.createElement("h2");
+    powerPointsHeading.textContent = "Power Points";
+
+    const powerPointsList = document.createElement("ul");
+
+    powerPoints.forEach((point) => {
+      const li = document.createElement("li");
+      li.textContent = point;
+      powerPointsList.appendChild(li);
+    });
+
+    overviewCard.appendChild(powerPointsHeading);
+    overviewCard.appendChild(powerPointsList);
+  }
 
   lessonMain.appendChild(overviewCard);
 }
@@ -86,25 +98,12 @@ function buildSidebar() {
       const lessonLi = document.createElement("li");
       const lessonLink = document.createElement("a");
 
-      lessonLink.href = "#";
+      lessonLink.href = `course_template.html?course=${currentCourseKey}&lesson=${lesson.id}`;
       lessonLink.textContent = lesson.title;
-      lessonLink.dataset.lessonId = lesson.id;
 
-      if (lesson.id === selectedLessonId) {
+      if (lesson.id === currentLessonId) {
         lessonLink.classList.add("selected-lesson");
       }
-
-      lessonLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        selectedLessonId = lesson.id;
-
-        document.querySelectorAll(".lesson-sidebar a").forEach((link) => {
-          link.classList.remove("selected-lesson");
-        });
-
-        lessonLink.classList.add("selected-lesson");
-        renderOverview();
-      });
 
       lessonLi.appendChild(lessonLink);
       lessonUl.appendChild(lessonLi);
@@ -116,8 +115,13 @@ function buildSidebar() {
   });
 }
 
+courseTitleEl.addEventListener("click", () => {
+  window.location.href = `course_template.html?course=${currentCourseKey}`;
+});
+
 startBtn.addEventListener("click", () => {
-  window.location.href = `lesson_template.html?course=${currentCourseKey}&lesson=${selectedLessonId}`;
+  const lessonToStart = getStartLessonId();
+  window.location.href = `lesson_template.html?course=${currentCourseKey}&lesson=${lessonToStart}`;
 });
 
 buildSidebar();

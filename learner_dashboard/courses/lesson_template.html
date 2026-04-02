@@ -6,7 +6,7 @@
   <title>Mathera | lesson</title>
 
   <link rel="stylesheet" href="../../style.css">
-  <link rel="stylesheet" href="../courses/curriculumn.css">
+  <link rel="stylesheet" href="../courses/curriculum.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<!-- Global top navbar-->
   <div class="navbar">
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">
       <span></span>
@@ -41,26 +42,42 @@
     <input type="text" placeholder="Search..">
   </div>
 
-  <main class="lesson-main lesson-template-main">
-    <header class="lesson-header">
-      <p id="lesson-label"></p>
-      <h1 id="lesson-title"></h1>
-      <p id="lesson-subtitle"></p>
-    </header>
+<div class="lesson-page">
+    <aside class="lesson-sidebar">
+      <h2 id="course-title"></h2>
+      <div id="unit-list"></div>
+    </aside>
+    <main class="lesson-main">
+      <header class="lesson-header">
+        <p id="lesson-label"></p>
+        <h1 id="lesson-title"></h1>
+        <p id="lesson-subtitle"></p>
+      </header>
+    <!-- </main>
 
-    <div class="mode-switch">
-      <button class="mode-btn active" data-mode="learn">Learn</button>
-      <button class="mode-btn" data-mode="quiz">Quiz</button>
-      <button class="mode-btn" data-mode="review">Review</button>
-    </div>
+    <main class="lesson-main lesson-template-main">
+        <header class="lesson-header">
+        <p id="lesson-label"></p>
+        <h1 id="lesson-title"></h1>
+        <p id="lesson-subtitle"></p>
+        </header> -->
 
-    <section id="learn" class="mode-section active-section"></section>
-    <section id="quiz" class="mode-section"></section>
-    <section id="review" class="mode-section"></section>
-  </main>
+        <div class="mode-switch">
+        <button class="mode-btn active" data-mode="learn">Learn</button>
+        <button class="mode-btn" data-mode="quiz">Quiz</button>
+        <button class="mode-btn" data-mode="review">Review</button>
+        </div>
 
-  <script src="../../script.js"></script>
-  <script src="../courses/data.js"></script>
-  <script src="../courses/lesson_template.js"></script>
+        <section id="learn" class="mode-section active-section"></section>
+        <section id="quiz" class="mode-section"></section>
+        <section id="review" class="mode-section"></section>
+    </main>
+</div>
+
+    <script src="../../script.js"></script>
+    <script src="../courses/data.js"></script>
+    <script src="'../course/course_template.js"></script>
+    <script src="../courses/lesson_template.js"></script>
+  
 </body>
 </html>
