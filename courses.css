@@ -1,4 +1,5 @@
 /* this is the css file for any modification for curriculums */
+/* this is css for course template*/
 
 * {
   box-sizing: border-box;
@@ -146,3 +147,25 @@ body {
 #course-title:hover {
   color: #2563eb;
 }
+
+/* this is the button that goes to lesson template*/
+.start-container {
+  margin-top: 40px;
+  text-align: right;
+}
+
+#start-btn {
+  padding: 12px 24px;
+  background-color: #2d6cdf;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#start-btn:hover {
+  background-color: #1f4fbf;
+}
+
+/* this is css for lesson template */

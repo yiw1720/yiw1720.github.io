@@ -361,21 +361,25 @@ function buildSidebar() {
   });
 }
 
-//////////////////////////////////////////////////////////// Mode switch buttons //////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// buttons //////////////////////////////////////////////////////////
 
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const selectedMode = button.dataset.mode;
 
-    buttons.forEach((btn) => btn.classList.remove("active"));
-    sections.forEach((section) => section.classList.remove("active-section"));
 
-    button.classList.add("active");
-    document.getElementById(selectedMode).classList.add("active-section");
-  });
+// start button
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  window.location.href = "lesson_template.html";
 });
 
-//////////////////////////////////////////////////////////// Start page //////////////////////////////////////////////////////////
+startBtn.addEventListener("click", () => {
+  const params = new URLSearchParams(window.location.search);
+  const course = params.get("course");
+
+  window.location.href = `lesson_template.html?course=${course}&lesson=limits`;
+});
+
+//////////////////////////////////////////////////////////// lesson page //////////////////////////////////////////////////////////
 
 buildSidebar();
 renderPage();
