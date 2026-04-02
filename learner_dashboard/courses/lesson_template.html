@@ -3,63 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mathera | lesson </title>
+  <title>Mathera | lesson</title>
 
-    <link rel="stylesheet" href="../../courses.css">
-    <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../courses/curriculumn.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="../../images/mathera_favicon.png" rel="icon" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="../../images/mathera_favicon.png" rel="icon" type="image/png">
 
 </head>
 
 <body>
-  <!--Here is my navigation bar-->
-
   <div class="navbar">
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <div class="pill-nav">
-        <a href="../../index.html" class="logo"> 
-          <img src="../../images/mathera_logo.png" alt="Mathera Logo">
-        </a>
-        <a href="../../team.html">Our Team</a>
-        <a href="../../donate.html">Donate</a>
-    </div>      
-
-      <ul class="nav-links" id="navLinks">
-        <a href="../ld_home.html">Learner Dashboard</a>
-        <a href="../../math_blog/mb_home.html">Math Blog</a>
-        <a href="../../programs/p_home.html">Programs</a>
-        <a href="../../about.html">About</a>
-      </ul>
-    
-    <input type="text" placeholder="Search..">
-  </div>
-<!--Here starts the lesson template -->
-<!-- Mode buttons -->
-      
-    <div class="mode-switch">
-        <button class="mode-btn active" data-mode="learn">Learn</button>
-        <button class="mode-btn" data-mode="quiz">Quiz</button>
-        <button class="mode-btn" data-mode="review">Review</button>
+      <a href="../../index.html" class="logo">
+        <img src="../../images/mathera_logo.png" alt="Mathera Logo">
+      </a>
+      <a href="../../team.html">Our Team</a>
+      <a href="../../donate.html">Donate</a>
     </div>
 
-  
+    <ul class="nav-links" id="navLinks">
+      <a href="../ld_home.html">Learner Dashboard</a>
+      <a href="../../math_blog/mb_home.html">Math Blog</a>
+      <a href="../../programs/p_home.html">Programs</a>
+      <a href="../../about.html">About</a>
+    </ul>
 
-</div>
+    <input type="text" placeholder="Search..">
+  </div>
 
-      
+  <main class="lesson-main lesson-template-main">
+    <header class="lesson-header">
+      <p id="lesson-label"></p>
+      <h1 id="lesson-title"></h1>
+      <p id="lesson-subtitle"></p>
+    </header>
+
+    <div class="mode-switch">
+      <button class="mode-btn active" data-mode="learn">Learn</button>
+      <button class="mode-btn" data-mode="quiz">Quiz</button>
+      <button class="mode-btn" data-mode="review">Review</button>
+    </div>
+
+    <section id="learn" class="mode-section active-section"></section>
+    <section id="quiz" class="mode-section"></section>
+    <section id="review" class="mode-section"></section>
+  </main>
 
   <script src="../../script.js"></script>
-  <script src="../../course.js"></script>
-
-
+  <script src="../courses/data.js"></script>
+  <script src="../courses/lesson_template.js"></script>
 </body>
 </html>

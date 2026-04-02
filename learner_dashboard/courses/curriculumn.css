@@ -1,6 +1,3 @@
-/* this is the css file for any modification for curriculums */
-/* this is css for course template*/
-
 * {
   box-sizing: border-box;
 }
@@ -58,9 +55,19 @@ body {
   color: #2563eb;
 }
 
+.selected-lesson {
+  color: #2563eb !important;
+  font-weight: 700;
+}
+
 .lesson-main {
   flex: 1;
   padding: 40px;
+}
+
+.lesson-template-main {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .lesson-header {
@@ -78,10 +85,30 @@ body {
   color: #555;
 }
 
+.start-container {
+  margin-top: 32px;
+  text-align: right;
+}
+
+#start-btn {
+  padding: 12px 24px;
+  background-color: #2d6cdf;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#start-btn:hover {
+  background-color: #1f4fbf;
+}
+
 .mode-switch {
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .mode-btn {
@@ -124,6 +151,14 @@ body {
   color: #444;
 }
 
+#course-title {
+  cursor: pointer;
+}
+
+#course-title:hover {
+  color: #2563eb;
+}
+
 @media (max-width: 900px) {
   .lesson-page {
     flex-direction: column;
@@ -138,34 +173,8 @@ body {
   .lesson-main {
     padding: 24px;
   }
-}
 
-#course-title {
-  cursor: pointer;
+  .start-container {
+    text-align: left;
+  }
 }
-
-#course-title:hover {
-  color: #2563eb;
-}
-
-/* this is the button that goes to lesson template*/
-.start-container {
-  margin-top: 40px;
-  text-align: right;
-}
-
-#start-btn {
-  padding: 12px 24px;
-  background-color: #2d6cdf;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-#start-btn:hover {
-  background-color: #1f4fbf;
-}
-
-/* this is css for lesson template */
