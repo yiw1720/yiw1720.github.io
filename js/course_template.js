@@ -119,9 +119,9 @@ courseTitleEl.addEventListener("click", () => {
   window.location.href = `course_template.html?course=${currentCourseKey}`;
 });
 
+// this is the start button that leads to mindmap_template
 startBtn.addEventListener("click", () => {
-  const lessonToStart = getStartLessonId();
-  window.location.href = `lesson_template.html?course=${currentCourseKey}&lesson=${lessonToStart}`;
+  window.location.href = `mindmap_template.html?course=${currentCourseKey}&lesson=${currentLessonId}`;
 });
 
 buildSidebar();

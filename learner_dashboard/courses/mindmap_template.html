@@ -41,24 +41,29 @@
 
     <input type="text" placeholder="Search..">
   </div>
+<!---------------->
 
-<div class="lesson-page">
-    <aside class="lesson-sidebar">
-      <h2 id="course-title"></h2>
-      <div id="unit-list"></div>
-    </aside>
-    <main class="lesson-main">
-      <header class="lesson-header">
-        <p id="lesson-label"></p>
-        <h1 id="lesson-title"></h1>
-        <p id="lesson-subtitle"></p>
-      </header>
-    </main>
-</div>
+  <main class="mindmap-page">
+  <header class="mindmap-header">
+    <p id="mindmap-label"></p>
+    <h1 id="mindmap-title"></h1>
+    <p id="mindmap-subtitle"></p>
+  </header>
+
+  <div class="mindmap-stage" id="mindmap-stage">
+    <svg id="mindmap-svg" class="mindmap-svg"></svg>
+    <div id="mindmap-root" class="mindmap-root"></div>
+  </div>
+
+  <div class="mindmap-info-panel">
+    <h2 id="info-title">Select a node</h2>
+    <p id="info-text">Click a node or an edge dot.</p>
+  </div>
+</main>
 
     <script src="../../js/script.js"></script>
-    <script src="../../js/data.js"></script>
-    <script src="../../js/lesson_template.js"></script>
+    <script src="../../js/mindmap_data.js"></script>
+    <script src="../../js/mindmap_template.js"></script>
   
 </body>
 </html>

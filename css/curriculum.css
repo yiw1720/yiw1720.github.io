@@ -177,3 +177,133 @@ body {
     text-align: left;
   }
 }
+
+/* mindmap_template */
+.mindmap-container {
+  position: relative;
+  width: 100%;
+  min-height: 800px;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.mindmap-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 160px;
+  max-width: 240px;
+  padding: 16px 20px;
+  border: 2px solid #111;
+  background: white;
+  text-align: center;
+}
+
+.mindmap-node.oval {
+  border-radius: 999px;
+}
+
+.mindmap-node.main {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.mindmap-node.dashed {
+  border-style: dashed;
+  border-radius: 24px;
+}
+
+#mindmap-svg {
+  z-index: 0;
+}
+
+#mindmap-nodes-layer {
+  z-index: 1;
+}
+
+.mindmap-container {
+  overflow: hidden;
+}
+
+.mindmap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.mindmap-nodes-layer {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  z-index: 1;
+}
+
+.mindmap-edge {
+  stroke: #222;
+  stroke-width: 2;
+  fill: none;
+}
+
+.mindmap-page {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.mindmap-header {
+  margin-bottom: 32px;
+}
+
+.mindmap-stage {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background: #f7f7f7;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.mindmap-root {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.mindmap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+
+.mindmap-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 170px;
+  padding: 16px 24px;
+  border: 3px solid #222;
+  border-radius: 999px;
+  background: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mindmap-node.active-node {
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.edge-dot {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.mindmap-info-panel {
+  margin-top: 24px;
+  padding: 24px;
+  background: white;
+  border-radius: 20px;
+}
