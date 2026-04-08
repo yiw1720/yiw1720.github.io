@@ -1,17 +1,17 @@
 const mindmapData = {
   singleVariableCalculus: {
     limits: {
-      label: "18.01 · Unit 1",
-      title: "Lesson 1: Limits",
-      subtitle: "Understand what a function approaches and why limits begin the language of calculus.",
+      label: "18.06 · Unit 1",
+      title: "Lecture 1: The geometry of linear equations",
+      subtitle: "Visualize Linear equations and construct the picture of Linear Algebra",
 
       layers: [
         [
           { id: "matrix", label: "Matrix Form\nAx = b" }
         ],
         [
-          { id: "rowpic", label: "Row Pic" },
-          { id: "colpic", label: "Column Pic" }
+          { id: "rowpic", label: "Row Picture" },
+          { id: "colpic", label: "Column Picture" }
         ],
         [
           { id: "intersection", label: "Find Intersection" },

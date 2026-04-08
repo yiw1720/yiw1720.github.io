@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
-const currentCourseKey = params.get("course") || "singleVariableCalculus";
-const currentLessonId = params.get("lesson") || "limits";
+const currentCourseKey = params.get("course") || "linearAlgebra";
+const currentLessonId = params.get("lesson") || "vectors";
 
 const currentMapData = mindmapData[currentCourseKey]?.[currentLessonId];
 

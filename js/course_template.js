@@ -121,7 +121,21 @@ courseTitleEl.addEventListener("click", () => {
 
 // this is the start button that leads to mindmap_template
 startBtn.addEventListener("click", () => {
-  window.location.href = `mindmap_template.html?course=${currentCourseKey}&lesson=${currentLessonId}`;
+  let firstLessonId = "";
+
+  if (currentCourseKey === "singleVariableCalculus") {
+    firstLessonId = "limits";
+  } else if (currentCourseKey === "linearAlgebra") {
+    firstLessonId = "vectors";
+  } else if (currentCourseKey === "multivariableCalculus") {
+    firstLessonId = "vectors3D";
+  } else {
+    firstLessonId = "limits"; // fallback
+  }
+
+// this means you are manually listing the first lesson for all the courses
+
+  window.location.href = `./mindmap_template.html?course=${currentCourseKey}&lesson=${firstLessonId}`;
 });
 
 buildSidebar();
