@@ -81,9 +81,25 @@ function renderOverview() {
   lessonMain.appendChild(overviewCard);
 }
 
+//////////////////// sidebar
+
 function buildSidebar() {
   courseTitleEl.textContent = courseData.courseTitle;
   unitList.innerHTML = "";
+
+  // create back link
+  const backWrapper = document.createElement("div");
+  backWrapper.classList.add("sidebar-back");
+
+  const backLink = document.createElement("a");
+  backLink.href = "../ld_home.html";
+  backLink.textContent = "← Learner Dashboard";
+  backLink.classList.add("sidebar-back-link");
+
+  backWrapper.appendChild(backLink);
+
+  // insert it ABOVE the course title
+  courseTitleEl.parentNode.insertBefore(backWrapper, courseTitleEl);
 
   courseData.units.forEach((unit) => {
     const unitBlock = document.createElement("div");
@@ -139,4 +155,22 @@ startBtn.addEventListener("click", () => {
 });
 
 buildSidebar();
+
+// make the sidebar foldable
+const sidebar = document.getElementById("sidebar");
+const toggleBtn = document.getElementById("sidebarToggle");
+
+if (sidebar && toggleBtn) {
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("collapsed");
+
+    if (sidebar.classList.contains("collapsed")) {
+      toggleBtn.textContent = "❯";
+    } else {
+      toggleBtn.textContent = "❮";
+    }
+  });
+}
+
+
 renderOverview();
