@@ -8,6 +8,28 @@ const stage = document.getElementById("mindmap-stage");
 const root = document.getElementById("mindmap-root");
 const svg = document.getElementById("mindmap-svg");
 
+/// make the nodes and edges clickable
+root.addEventListener("click", (e) => {
+  const nodeEl = e.target.closest(".mindmap-node");
+  if (!nodeEl) return;
+
+  document.querySelectorAll(".mindmap-node").forEach((n) => {
+    n.classList.remove("active-node");
+  });
+
+  nodeEl.classList.add("active-node");
+  infoTitle.textContent = nodeEl.dataset.label || "Node";
+  infoText.textContent = nodeEl.dataset.content || "No content yet.";
+});
+
+svg.addEventListener("click", (e) => {
+  const dotEl = e.target.closest(".edge-dot");
+  if (!dotEl) return;
+
+  infoTitle.textContent = "Logic Connection";
+  infoText.textContent = dotEl.dataset.text || "No explanation yet.";
+});
+
 const labelEl = document.getElementById("mindmap-label");
 const titleEl = document.getElementById("mindmap-title");
 const subtitleEl = document.getElementById("mindmap-subtitle");
@@ -47,15 +69,9 @@ function renderNodes(mapData) {
       el.style.left = `${xPercent}%`;
       el.style.top = `${yPercent}%`;
 
-      el.addEventListener("click", () => {
-        document.querySelectorAll(".mindmap-node").forEach((n) => {
-          n.classList.remove("active-node");
-        });
-
-        el.classList.add("active-node");
-        infoTitle.textContent = node.label.replace(/\n/g, " ");
-        infoText.textContent = mapData.nodeContent[node.id] || "No content yet.";
-      });
+      el.dataset.id = node.id;
+      el.dataset.label = node.label.replace(/\n/g, " ");
+      el.dataset.content = mapData.nodeContent[node.id] || "No content yet.";
 
       root.appendChild(el);
     });
@@ -125,10 +141,7 @@ function drawEdges(mapData) {
     dot.setAttribute("stroke-width", "3");
     dot.classList.add("edge-dot");
 
-    dot.addEventListener("click", () => {
-      infoTitle.textContent = "Logic Connection";
-      infoText.textContent = edge.text || "No explanation yet.";
-    });
+    dot.dataset.text = edge.text || "No explanation yet.";
 
     svg.appendChild(dot);
   });

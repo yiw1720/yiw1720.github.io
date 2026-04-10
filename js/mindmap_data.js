@@ -1,6 +1,6 @@
 const mindmapData = {
-  singleVariableCalculus: {
-    limits: {
+  linearAlgebra: {
+    vectors: {
       label: "18.06 · Unit 1",
       title: "Lecture 1: The geometry of linear equations",
       subtitle: "Visualize Linear equations and construct the picture of Linear Algebra",

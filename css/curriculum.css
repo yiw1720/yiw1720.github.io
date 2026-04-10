@@ -260,7 +260,7 @@ body {
   }
 }
 
-/* mindmap_template */
+/* -------------------------------------------mindmap_template */
 .mindmap-container {
   position: relative;
   width: 100%;
@@ -315,6 +315,10 @@ body {
   z-index: 0;
 }
 
+.mindmap-svg line{
+  pointer-events: none;
+}
+
 .mindmap-nodes-layer {
   position: relative;
   width: 100%;
@@ -348,8 +352,9 @@ body {
 }
 
 .mindmap-root {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
   z-index: 2;
 }
 
