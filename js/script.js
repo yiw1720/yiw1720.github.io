@@ -1,13 +1,14 @@
 // Navbar setup
-
 const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.getElementById("navLinks");
+const navLinks = document.getElementById("navLinks");
 
-    menuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-    });
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+  });
+}
 
-// homepage img side show 
+// homepage img side show
 let slideIndex = 0;
 let slideTimer;
 
@@ -15,7 +16,8 @@ const slides = document.querySelectorAll(".slide");
 const dots = document.querySelectorAll(".dot");
 
 function showSlide(index) {
-  // wrap around
+  if (slides.length === 0 || dots.length === 0) return;
+
   if (index >= slides.length) {
     slideIndex = 0;
   } else if (index < 0) {
@@ -24,19 +26,21 @@ function showSlide(index) {
     slideIndex = index;
   }
 
-  // hide all slides
-  slides.forEach(slide => {
+  slides.forEach((slide) => {
     slide.style.display = "none";
   });
 
-  // remove active from all dots
-  dots.forEach(dot => {
+  dots.forEach((dot) => {
     dot.classList.remove("active");
   });
 
-  // show current slide
-  slides[slideIndex].style.display = "block";
-  dots[slideIndex].classList.add("active");
+  if (slides[slideIndex]) {
+    slides[slideIndex].style.display = "block";
+  }
+
+  if (dots[slideIndex]) {
+    dots[slideIndex].classList.add("active");
+  }
 }
 
 function nextSlide() {
@@ -44,6 +48,8 @@ function nextSlide() {
 }
 
 function startSlideshow() {
+  if (slides.length === 0 || dots.length === 0) return;
+
   slideTimer = setInterval(() => {
     nextSlide();
   }, 3000);
@@ -60,5 +66,7 @@ function goToSlide(index) {
 }
 
 // initialize
-showSlide(slideIndex);
-startSlideshow();
+if (slides.length > 0 && dots.length > 0) {
+  showSlide(slideIndex);
+  startSlideshow();
+}
